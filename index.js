@@ -8,7 +8,11 @@ const sequelize = new Sequelize(connectionString, {define: { timestamps: false }
 const app = express()
 // const sequelize = new Sequelize('postgres://postgres:secret@localhost:5432/postgres', { define: { timestamps: false } })
 
-app.listen(4001, () => console.log('Express API listening on port 4001'))
+const port = 4000
+
+app.listen(process.env.PORT || port, () => `Listening on port ${port}`)
+
+console.log("my process env port is", process.env.PORT)
 
 // TESTING
 app.get('/do-something', (request, response) => {
@@ -80,7 +84,7 @@ app.put('/houses/:id', function (req, res) {
             title: 'Super Duper Million Dollar Mainson'
         })
             .then(house => res.status(200).json(house))
-            .then(house => console.log(`The house with ID ${house.id} is now updated`, house.values)))
+            .then(house2 => console.log(`The house with ID ${house2.id} is now updated`, house2.values)))
 })
 
 // DELETE
@@ -89,5 +93,5 @@ app.delete('/houses/:id', function (req, res) {
     House.findById(id)
         .then(house => house.destroy(id)
             .then(house => res.status(200).json(house))
-            .then(house => console.log(`The house with ID ${house.id} is now destroyed`)))
+            .then(house3 => console.log(`The house with ID ${house3.id} is now destroyed`)))
 })
