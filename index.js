@@ -2,8 +2,11 @@ const express = require('express')
 const Sequelize = require('sequelize')
 const bodyParser = require('body-parser')
 
+const connectionString = process.env.DATABASE_URL || 'postgres://postgres:secret@localhost:5432/postgres'
+const sequelize = new Sequelize(connectionString, {define: { timestamps: false }})
+
 const app = express()
-const sequelize = new Sequelize('postgres://postgres:secret@localhost:5432/postgres', { define: { timestamps: false } })
+// const sequelize = new Sequelize('postgres://postgres:secret@localhost:5432/postgres', { define: { timestamps: false } })
 
 app.listen(4001, () => console.log('Express API listening on port 4001'))
 
